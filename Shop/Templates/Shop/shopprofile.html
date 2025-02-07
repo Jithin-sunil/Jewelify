@@ -1,0 +1,63 @@
+{% extends "User/Header.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1 align="center">ShopProfile</h1>
+    <form action="" method="post"> 
+        {% csrf_token %}
+
+
+   <table class="table table-bordered table-hover">
+    <td>
+        <img src="{{Shop.shop_photo.url}}" width="150" height="150" alt=""> </td>    
+   <tr>
+    <td>Name</td>
+    <td>{{Shop.shop_name}}</td>
+   </tr>
+   <tr>
+    <td>Email</td>
+    <td>{{Shop.shop_email}}</td>
+   </tr>
+   <tr>
+    <td>Contact</td>
+    <td>{{Shop.shop_contact}}</td>
+   </tr>
+   <tr>
+    <td>Address</td>
+    <td>{{Shop.shop_address}}</td>
+   </tr>
+  
+    <tr>
+        <tr>
+            <td>District</td>
+            <td>{{Shop.place.district.district_name}}</td>
+           
+          </tr>
+        
+    </tr>
+       <tr>
+        <td>Place</td>
+            <td>{{Shop.place.place_name}}</td>
+            </tr>
+    
+        <tr>
+            <td colspan="2" align="center">
+            <a class="btn btn-success"  href="{% url 'Shop:editshop'  %}">Edit Profile</a>
+            <a  class="btn btn-success"href="{% url 'Shop:shopchangepass'  %}">Change Password</a>
+
+
+            
+        </td>  
+        </tr>
+        </table>
+    </form>
+  </body>
+</html>
+{% endblock %}

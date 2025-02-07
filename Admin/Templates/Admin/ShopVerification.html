@@ -1,0 +1,122 @@
+{% extends 'Admin/Header.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shop Verification</title>
+</head>
+
+<body>
+    <h3>New shops</h3>
+
+    <table>
+        <tr>
+            <td>#</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Contact</td>
+            <td>Address</td>
+            <td>District</td>
+            <td>Place</td>
+            <td>Photo</td>
+            <td>Proof</td>
+
+
+            <td>Action</td>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.shop_name}}</td>
+            <td>{{i.shop_email}}</td>
+            <td>{{i.shop_contact}}</td>
+            <td>{{i.shop_address}}</td>
+            <td>{{i.place.district.district_name}}</td>
+            <td>{{i.place.place_name}}</td>
+            <td><a href="{{i.shop_photo.url}}"><img src="{{i.shop_photo.url}}" width="150" height="150" alt=""></a></td>
+            <td><a href="{{i.shop_proof.url}}">View Proof</a></td>
+
+            <td><a href="{% url 'Admin:accept' i.id %}">Verify</a>
+                <a href="{% url 'Admin:reject' i.id  %}">Reject</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    <h3>Verified shops</h3>
+    <table>
+        <tr>
+            <td>#</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Contact</td>
+            <td>Address</td>
+            <td>District</td>
+            <td>Place</td>
+            <td>Photo</td>
+            <td>Proof</td>
+
+
+            <td>Action</td>
+        </tr>
+        {% for i in verified %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.shop_name}}</td>
+            <td>{{i.shop_email}}</td>
+            <td>{{i.shop_contact}}</td>
+            <td>{{i.shop_address}}</td>
+            <td>{{i.place.district.district_name}}</td>
+            <td>{{i.place.place_name}}</td>
+            <td><a href="{{i.shop_photo.url}}"><img src="{{i.shop_photo.url}}" width="150" height="150" alt=""></a></td>
+            <td><a href="{{i.shop_proof.url}}">View Proof</a></td>
+
+            <a href="{% url 'Admin:reject' i.id  %}">Reject</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3> Rejected shops</h3>
+    <table>
+        <tr>
+            <td>#</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Contact</td>
+            <td>Address</td>
+            <td>District</td>
+            <td>Place</td>
+            <td>Photo</td>
+            <td>Proof</td>
+
+
+            <td>Action</td>
+        </tr>
+        {% for i in reject %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.shop_name}}</td>
+            <td>{{i.shop_email}}</td>
+            <td>{{i.shop_contact}}</td>
+            <td>{{i.shop_address}}</td>
+            <td>{{i.place.district.district_name}}</td>
+            <td>{{i.place.place_name}}</td>
+            <td><a href="{{i.shop_photo.url}}"><img src="{{i.shop_photo.url}}" width="150" height="150" alt=""></a></td>
+            <td><a href="{{i.shop_proof.url}}">View Proof</a></td>
+
+            <td><a href="{% url 'Admin:accept' i.id %}">Verify</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
+{% endblock %}

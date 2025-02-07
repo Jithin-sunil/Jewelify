@@ -1,0 +1,62 @@
+{% extends "User/Header.html" %}
+{% block content %}
+{% load mathfilters %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Booking</title>
+</head>
+
+<body>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <td>#</td>
+            <td>User Name</td>
+            <td>User Contact</td>
+            <td>Product Name</td>
+            <td>Product Photo</td>
+            <td>Price</td>
+            <td>Details</td>
+            <td>Type</td>
+            <td>Category</td>
+            <td>Status</td>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.booking.user.user_name}}</td>
+            <td>{{i.booking.user.user_contact}}</td>
+            <td>{{i.product.product_name}}</td>
+            <td><img src="{{i.product.product_photo.url}}" width="150" height="150"></td>
+            <td>{{i.booking.booking_amount}}</td>
+            <td>{{i.product.product_details}}</td>
+            <td>{{i.product.type_id.type_name}}</td>
+            <td>{{i.product.category.category_name}}</td>
+            <td>{% if i.cart_status == 1 %}
+                <span style="color: green;">Payment Pending..</span>
+                {% elif i.cart_status == 2 %}
+                <span style="color: blue;">Payment Completed..</span>
+                <a href="{% url 'Shop:orderstatus' i.id 3 %}">Packed</a>
+                {% elif i.cart_status == 3  %}
+
+                <span style="color: red;">Order Packed</span>
+                <a href="{% url 'Shop:orderstatus' i.id 4 %}">Shipped</a>
+
+                {% elif i.cart_status == 4  %}
+                <span style="color: red;">Order Shipped</span>
+                <a href="{% url 'Shop:orderstatus' i.id 5 %}">Delivered</a>
+
+                {% elif i.cart_status == 5  %}
+                <span style="color: red;">Order Completed</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <h1>ViewComplaint</h1>
+        <table>
+            <tr>
+                <td>Sl No</td>
+                <td>User</td>
+                <td>File</td>
+                <td>Content</td>
+                <td>Date</td>
+                <td>Action</td>
+            </tr>
+            {% for i in user %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.user.user_name}}</td>
+                <td><img src="{{i.complaint_file.url}}" width="70px" height="70px" /></td>
+                <td>{{i.complaint_description}}</td>
+                <td>{{i.complaint_date}}</td>
+                <td><a href="{% url 'Admin:reply' i.id %}">Reply</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <br>
+        <h1>RepliedComplaints</h1>
+        <table>
+            <tr>
+                <td>Sl No</td>
+                <td>User</td>
+                <td>File</td>
+                <td>Content</td>
+                <td>Date</td>
+                <td>Reply</td>
+            </tr>
+            {% for i in userrep %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.user.user_name}}</td>
+                <td><img src="{{i.complaint_file.url}}" width="70px" height="70px" /></td>
+                <td>{{i.complaint_description}}</td>
+                <td>{{i.complaint_date}}</td>
+                <td>{{i.complaint_replay}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint</title>
+</head>
+<body>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1 align="center">Post Complaint</h1>
+        <table border="1" align="center">
+            <tr>
+                <td>Title</td>
+                <td><input type="file" name="txt_file" id="txt_file"></td>
+            </tr>
+            <tr>
+                <td>Content</td>
+                <td><textarea name="txt_content" id="txt_content"></textarea></td>
+            </tr>
+            <tr>
+                
+                <td colspan="2" align="center"><input type="submit" value="Submit" name="btn_submit "></td>
+            </tr>
+        </table>
+        <br>
+        <table border="1" align="center">
+            <tr>
+                <td>Sl No</td>
+                <td>File</td>
+                <td>Content</td>
+                <td>Date</td>
+                <td>Reply</td>
+                <td>Action</td>
+            </tr>
+            {% for i in data %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><img src="{{i.complaint_file.url}}" width="70px" height="70px" /></td>
+                <td>{{i.complaint_description}}</td>
+                <td>{{i.complaint_date}}</td>
+                <td>{{i.complaint_replay}}</td>
+                <td><a href="{% url 'User:delcomplaint' i.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </tabe>
+
+    </form>
+</body>
+</html>

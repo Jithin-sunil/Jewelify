@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Sign up Form</h1>
+    <form action="" method="post" enctype="multipart/form-data"> 
+        {% csrf_token %}
+
+   <table border="3">
+   <tr>
+    <td>Name</td>
+    <td><input type="text" name="txt_name" placeholder="enter name"></td>
+   </tr>
+   <tr>
+    <td>Address</td>
+    <td><input type="text" name="txt_address" placeholder="enter your address"></td>
+   </tr>
+   <tr>
+    <td>Contact</td>
+    <td><input type="text" name="txt_contact" placeholder="enter your contact number "></td>
+   </tr>
+   <tr>
+    <td>Email</td>
+    <td><input type="text" name="txt_email" placeholder="enter email"></td>
+   </tr>
+    <tr>
+        <td>District</td>
+        <td>
+        <select name="seldistrict" id="seldistrict">
+              <option value="sel">--select--</option>
+                {% for i in dis %}
+                <option value="{{i.id}}">{{i.district_name}}</option>
+                {% endfor %}
+              </select>	      
+        </td>
+    </tr>
+       
+
+    <tr>
+        <td>Place</td>
+            <td>
+                <select name="selplace" id="selplace">
+                    <option value="">--select--</option>
+                </select>
+            </td>
+            </tr>
+    <tr>
+            <td>Photo</td>
+            <td><input type="file" name="filephoto"></td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td>
+                <input type="radio" name="txt_gender" value="Male">Male
+                <input type="radio" name="txt_gender" value="Female">Female
+            </td>
+        </tr>
+        <tr>
+            <td>DOB</td>
+            <td><input type="date" name="txt_date"></td>
+
+        </tr>
+
+        <tr>
+            <td>Password</td>
+            <td><input type="password" name="txt_password"></td>
+        </tr>
+
+        <td colspan="2" align="center">
+            <input type="submit" name="btnlog" value="SUBMIT">
+            <input type="submit" name="btnlog" value="CANCEL">
+        </td>  
+        </tr>  
+    </table>
+   </form>
+   </body>
+   </html>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <script>
+       $("#seldistrict").change(function () {
+           var did = $(this).val();
+           var ur = "{% url 'Guest:ajaxplace' %}"
+           $.ajax({
+               url: ur,
+               data: { did: did, },
+               success: function (data) {
+                   $("#selplace").html(data);
+               },
+           });
+        });
+   </script>

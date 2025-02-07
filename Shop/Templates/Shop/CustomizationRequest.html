@@ -1,0 +1,47 @@
+{% extends 'Shop/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custamization Request</title>
+</head>
+<body>
+    
+    <table class="table table-bordered table-hover">
+        <tr>
+            <td>#</td>
+            <td>User Name</td>
+            <td>User Contact</td>
+            <td>Details</td>
+            <td>Type</td>
+            <td>Category</td>
+            <td>Weight</td>
+            <td>Amount</td>
+            <td>Action</td>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.user.user_name}}</td>
+            <td>{{i.user.userr_contact}}</td>
+            <td>{{i.customization_details}}</td>
+            <td>{{i.types.type_name}}</td>
+            <td>{{i.category.category_name}}</td>
+            <td>{{i.customization_weight}}</td>
+            <td>
+                {% if i.customization_amount %}
+                {{i.customization_amount}}
+                {% else %}
+                N/A
+                {% endif %}
+            </td>
+            <td></td>
+        </tr>
+        {% endfor %}
+    </table>
+    
+</body>
+</html>
+{% endblock %}

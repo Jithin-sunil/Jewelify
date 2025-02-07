@@ -1,0 +1,117 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .loader {
+        display: none;
+        border: 4px solid #f3f3f3;
+        border-radius: 50%;
+        border-top: 4px solid #3498db;
+        width: 30px;
+        height: 30px;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* From Uiverse.io by alexruix */
+    .card {
+        width: 190px;
+        height: 254px;
+        padding: .8em;
+        background: #f5f5f5;
+        position: relative;
+        overflow: visible;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    }
+
+    .card-img {
+        background-color: #ffcaa6;
+        height: 40%;
+        width: 100%;
+        border-radius: .5rem;
+        transition: .3s ease;
+    }
+
+    .card-info {
+        padding-top: 10%;
+    }
+
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .card-footer {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 10px;
+        border-top: 1px solid #ddd;
+    }
+
+    /*Text*/
+    .text-title {
+        font-weight: 900;
+        font-size: 1.2em;
+        line-height: 1.5;
+    }
+
+    .text-body {
+        font-size: .9em;
+        padding-bottom: 10px;
+    }
+
+    /*Button*/
+    .card-button {
+        border: 1px solid #252525;
+        display: flex;
+        padding: .3em;
+        cursor: pointer;
+        border-radius: 50px;
+        transition: .3s ease-in-out;
+    }
+
+    /*Hover*/
+    .card-img:hover {
+        transform: translateY(-25%);
+        box-shadow: rgba(226, 196, 63, 0.25) 0px 13px 47px -5px, rgba(180, 71, 71, 0.3) 0px 8px 16px -8px;
+    }
+
+    .card-button:hover {
+        border: 1px solid #ffcaa6;
+        background-color: #ffcaa6;
+    }
+</style>
+
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for i in product %}
+    <div class="col">
+        <div class="card h-100">
+            <img src="{{i.product_photo.url}}" class="card-img-top" alt="Product Image">
+            <div class="card-body">
+                <h5 class="card-title">{{i.product_name}}</h5>
+                <p class="card-text">
+                    <strong>Size:</strong> {{i.product_size}}<br>
+                    <strong>Making Price:</strong> {{i.product_makingprice}}<br>
+                    <strong>Details:</strong> {{i.product_details}}<br>
+                    <strong>Weight:</strong> {{i.product_weight}}<br>
+                    <strong>Type:</strong> {{i.type_id.type_name}}<br>
+                    <strong>Category:</strong> {{i.category.category_name}}
+                </p>
+                <a href="{% url 'User:addcart' i.id %}" class="btn btn-primary w-100">Add to Cart</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="text-center">No products found.</div>
+    {% endfor %}
+</div>

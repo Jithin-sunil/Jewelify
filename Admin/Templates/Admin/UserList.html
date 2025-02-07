@@ -1,0 +1,50 @@
+{% extends 'Admin/Header.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>user Verification</title>
+</head>
+
+<body>
+    <h3>New users</h3>
+
+    <table>
+        <tr>
+            <td>#</td>
+            <td>Name</td>
+            <td>Email</td>
+            <td>Contact</td>
+            <td>Address</td>
+            <td>District</td>
+            <td>Place</td>
+            <td>Photo</td>
+           
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.user_name}}</td>
+            <td>{{i.user_email}}</td>
+            <td>{{i.user_contact}}</td>
+            <td>{{i.user_address}}</td>
+            <td>{{i.place.district.district_name}}</td>
+            <td>{{i.place.place_name}}</td>
+            <td><a href="{{i.user_photo.url}}"><img src="{{i.user_photo.url}}" width="150" height="150" alt=""></a></td>
+
+           
+        </tr>
+        {% endfor %}
+    </table>
+
+
+    
+</body>
+
+</html>
+{% endblock %}

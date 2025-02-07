@@ -1,0 +1,47 @@
+{% extends "User/Header.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 align="center">Change Password</h1>
+    <form action="" method="post"> 
+        {% csrf_token %}
+
+
+   <table  class="table table-bordered table-hover" >
+       
+   <tr>
+    <td>Old Password</td>
+    <td><input class="form-control" type="text" name="txt_old" placeholder="enter old password"></td>
+   </tr>
+   <tr>
+    <td>New Password</td>
+    <td><input class="form-control" type="text" name="txt_new" placeholder="enter New password"></td>
+   </tr>
+   <tr>
+    <td>Re-Type Password</td>
+    <td><input class="form-control" type="text" name="txt_retype" placeholder="enter Retype Password "></td>
+   </tr>
+   
+   
+        <tr>
+        <td colspan="2" align="center">
+            <input type="submit" class="btn btn-success" name="btnlog" value="Change Password">
+            <input type="submit" class="btn btn-danger" name="btnlog" value="CANCEL">
+            
+        </td>  
+        </tr>
+        </table>
+    </form>
+</body>
+</html>
+{% if msg %}
+<script>
+    alert("{msg}")
+</script>  
+{% endblock %}

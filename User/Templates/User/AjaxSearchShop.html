@@ -1,0 +1,29 @@
+<table border="1" >
+    <tr>
+        <td>#</td>
+        <td>Name</td>
+        <td>Email</td>
+        <td>Contact</td>
+        <td>Logo</td>
+        <td>Address</td>
+        <td>District</td>
+        <td>Place</td>
+        <td>Action</td>
+    </tr>
+    {% for i in shop %}
+    <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.shop_name}}</td>
+        <td>{{i.shop_email}}</td>
+
+        <td>{{i.shop_contact}}</td>
+        <td><img src="{{i.shop_photo.url}}" width="150" height="150" alt=""></td>
+        <td>{{i.shop_address}}</td>
+        
+        <td>{{i.place.district.district_name}}</td>
+        <td>{{i.place.place_name}}</td>
+        <td><a href="{% url 'User:viewproduct' i.id  %}">View Product</a></td>
+        
+    </tr>
+    {% endfor %}
+</table>

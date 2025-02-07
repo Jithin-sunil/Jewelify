@@ -1,0 +1,79 @@
+{% extends "User/Header.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .button-cell {
+        text-align: center; /* Centers content within the cell */
+    }
+    
+    .button {
+        background-color: rgb(98, 252, 42);
+        border: none;
+        color: white;
+        padding: 2.5px 10px;
+        font-size: 15px;
+        cursor: pointer;
+        border-radius: 4px;
+        margin: 0 5px; /* Adds space between buttons */
+    }
+    </style>
+</head>
+<body>
+    
+    <h1>Profile</h1>
+    <form action="" method="post"> 
+        {% csrf_token %}
+
+
+   <table  class="table table-bordered table-hover" >
+    <td colspan="2" align="center">
+        <img src="{{user.user_photo.url}}" width="150" height="150" alt="" > </td>    
+   <tr>
+    <td>Name</td>
+    <td>{{user.user_name}}</td>
+   </tr>
+   <tr>
+    <td>Email</td>
+    <td>{{user.user_email}}</td>
+   </tr>
+   <tr>
+    <td>Contact</td>
+    <td>{{user.user_contact}}</td>
+   </tr>
+   <tr>
+    <td>Address</td>
+    <td>{{user.user_address}}</td>
+   </tr>
+  
+    <tr>
+        <tr>
+            <td>District</td>
+            <td>{{user.place.district.district_name}}</td>
+           
+          </tr>
+        
+    </tr>
+       <tr>
+        <td>Place</td>
+            <td>{{user.place.place_name}}</td>
+            </tr>
+    
+        <tr>
+            <td colspan="2" align="center">
+            <a class="btn btn-success"  href="{% url 'User:edit'  %}">Edit Profile</a>
+            <a  class="btn btn-success" href="{% url 'User:changepass'  %}">Change Password</a>
+
+
+            
+        </td>  
+        </tr>
+        </table>
+    </form>
+  </body>
+</html>
+{% endblock %}
